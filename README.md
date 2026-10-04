@@ -1,16 +1,17 @@
 # Gia Sư Nhí
 
-Web app luyện Toán và Tiếng Việt lớp 1–5 (theo chương trình GDPT 2018), dùng trên điện thoại, gửi link qua Zalo.
+Gia sư Toán và Tiếng Việt lớp 1–5 cho học sinh Việt Nam. Miễn phí, không cần đăng ký, chạy trên điện thoại.
 
-- Toán: 345 bài theo đúng chủ đề, tên bài SGK Kết nối tri thức lớp 1–5, đề sinh tự động. Tiếng Việt: 59 bài theo mạch kiến thức Chương trình GDPT 2018, câu hỏi và bài đọc tự soạn.
-- Sai lần 1 có gợi ý, sai lần 2 có lời giải. Chấm điểm thang 10.
-- Khu vực phụ huynh: theo dõi tiến độ, sao chép báo cáo gửi Zalo.
-- Không đăng ký, không thu thập thông tin cá nhân. Kết quả lưu trên trình duyệt của từng máy.
+**Không làm bài hộ — giúp con hiểu bài.**
 
-## Cấu trúc
-- `index.html` — toàn bộ ứng dụng (một tệp, không cần build).
-- `og.png` — ảnh xem trước khi dán link vào Zalo/Facebook.
+- Học hôm nay: gợi ý bài nên học dựa trên mức thành thạo và lỗi sai, mục tiêu mỗi ngày, chuỗi ngày, XP.
+- Gia sư từng bước: 18 dạng bài trọng tâm, hỏi từng bước nhỏ, có gợi ý và cách giải thích khác.
+- Học tập: 345 bài Toán theo SGK Kết nối tri thức, 59 bài Tiếng Việt theo Chương trình GDPT 2018.
+- Luyện tập thích ứng, ôn lỗi lặp lại, thử thách; tiến bộ, thành tích, khu vực phụ huynh.
+- Dữ liệu chỉ lưu trên trình duyệt; có mã sao lưu để chuyển máy.
+
+## Mã nguồn
+`index.html` là toàn bộ ứng dụng (một tệp, không cần build). Mã phát triển chia theo phần: nội dung (`core`, `toan1–5`, `tv1–5`), student model (`model`), gia sư từng bước (`tutor`), giao diện (`ui`, `style`).
 
 ## Triển khai
-Render Static Site: build command để trống (hoặc `echo ok`), publish directory `.`.
-Mỗi lần đẩy lên nhánh `main`, Render tự triển khai lại.
+Render Static Site, publish directory `.`.
