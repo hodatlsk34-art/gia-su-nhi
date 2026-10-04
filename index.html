@@ -360,6 +360,43 @@ td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .spin{width:54px;height:54px;border-radius:50%;border:5px solid var(--primary-soft);border-top-color:var(--primary);animation:sp 1s linear infinite}
 @keyframes sp{to{transform:rotate(360deg)}}
 
+/* ===== bố cục màn hình rộng ===== */
+.page>div{margin-inline:auto}
+@media(min-width:1024px){.shell.noside{display:block}}
+.homegrid{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);grid-template-areas:"hello" "stats" "rec" "quick" "others" "recent";max-width:1120px}
+.ha-hello{grid-area:hello;margin:0}.ha-stats{grid-area:stats;display:grid;gap:14px;align-content:start}.ha-rec{grid-area:rec}.ha-quick{grid-area:quick}.ha-others{grid-area:others}.ha-recent{grid-area:recent}
+.ha-others .sec-h,.ha-recent .sec-h{margin-top:8px}
+.ha-comment{display:none}
+@media(min-width:1024px){
+  .homegrid{grid-template-columns:minmax(0,1.55fr) minmax(320px,1fr);grid-template-areas:"hello hello" "rec stats" "quick stats" "others recent";gap:18px 22px;align-items:start}
+  .ha-comment{display:block}
+  .goalrow{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .rec{padding:26px}
+  .rec h2{font-size:1.5rem}
+  .ha-recent .sec-h,.ha-others .sec-h{margin-top:0}
+}
+/* màn hình chào */
+.land{max-width:560px}
+.land-l,.land-r{display:grid;gap:18px;align-content:start}
+.preview{background:var(--surface);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow);padding:18px;display:grid;gap:12px;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:24px 24px}
+.preview .msg{max-width:100%}
+.pv-choices{display:flex;gap:10px;justify-content:center}
+.pv-choices span{min-width:64px;text-align:center;border:2px solid var(--line-strong);background:var(--surface);border-radius:12px;padding:8px 14px;font-weight:700}
+.pv-choices span.on{border-color:var(--green);background:var(--green-soft);color:var(--green)}
+.land-r .preview{display:none}
+@media(min-width:900px){
+  .land{max-width:1120px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center;min-height:calc(100vh - 40px);padding-block:40px}
+  .land .hero{padding-top:0}
+  .land .hero h1{font-size:4rem}
+  .land .hero .tag-l{font-size:1.5rem}
+  .land .hero p{font-size:1.08rem}
+  .land-r .preview{display:grid}
+  .land #obgo{width:auto;justify-self:start;padding-inline:32px}
+}
+/* các bước onboarding trên máy tính: thẻ nổi giữa màn hình */
+@media(min-width:900px){.ob:not(.land){margin-top:6vh;background:var(--surface);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow);padding:32px}}
+
 </style>
 </head>
 <body>
@@ -1045,7 +1082,7 @@ function streak(){const d=D().days;let n=0,t=Date.now();if(!d[dayKey(t)])t-=8640
 function level(){const xp=D().xp;let i=0;while(i+1<LEVELS.length&&xp>=LEVELS[i+1][0])i++;const cur=LEVELS[i],nx=LEVELS[i+1];return {i:i+1,name:cur[1],xp,from:cur[0],to:nx?nx[0]:null}}
 const todayCount=()=>D().days[dayKey()]||0;
 function weekStats(){const since=Date.now()-7*864e5;const ss=D().sess.filter(s=>s.t>=since);const days=new Set(ss.map(s=>dayKey(s.t))).size;const ms=D().ev.filter(e=>e[0]*1000>=since).reduce((a,e)=>a+e[3],0)*1000;return {sessions:ss.length,days,ms}}
-const fmtTime=ms=>{const m=Math.round(ms/60000);return m<60?`${m} phút`:`${Math.floor(m/60)} giờ ${m%60} phút`};
+const fmtTime=ms=>{const m=Math.round(ms/60000);if(m<1)return ms>0?"dưới 1 phút":"0 phút";return m<60?`${m} phút`:`${Math.floor(m/60)} giờ ${m%60} phút`};
 /* ===== Huy hiệu ===== */
 function checkBadges(){const d=D(),got=[];const give=id=>{if(!d.badges[id]){d.badges[id]=Date.now();got.push(id)}};
   if(d.sess.length>=1)give('first');if(d.sess.some(s=>s.score===10))give('perfect');const st=streak();if(st>=3)give('streak3');if(st>=7)give('streak7');
@@ -1230,8 +1267,8 @@ function topbar(){const k=kid();if(!k){$('#topin').innerHTML='';return}const st=
   $('#topin').innerHTML=`<button class="brand" onclick="go('home')">${LOGO}<span class="bt">Gia Sư Nhí</span></button><span class="spacer"></span><span class="pillstat fire" title="Chuỗi ngày học">🔥 ${st}</span><span class="pillstat" title="Điểm kinh nghiệm">⭐ ${lv.xp}</span><button class="kidchip" onclick="kidPicker()" aria-label="Đổi bé"><span class="avatar">${esc(k.name.trim()[0]||'B').toUpperCase()}</span>Lớp ${k.grade}</button>`}
 function setNav(r){document.querySelectorAll('[data-r]').forEach(a=>{if(a.dataset.r===r)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')})}
 function render(){
-  if(!kid()||!kid().onboarded){$('#side').hidden=true;$('#bnav').hidden=true;$('.top').hidden=true;return onboarding()}
-  $('#side').hidden=false;$('#bnav').hidden=false;$('.top').hidden=false;
+  if(!kid()||!kid().onboarded){document.querySelector('.shell').classList.add('noside');$('#side').hidden=true;$('#bnav').hidden=true;$('.top').hidden=true;return onboarding()}
+  document.querySelector('.shell').classList.remove('noside');$('#side').hidden=false;$('#bnav').hidden=false;$('.top').hidden=false;
   const r=(location.hash||'#home').slice(1);route=ROUTES[r]?r:'home';
   try{speechSynthesis.cancel()}catch(e){}
   topbar();setNav(route==='mistakes'?'progress':route);ROUTES[route]();window.scrollTo(0,0);
@@ -1241,12 +1278,13 @@ const LOGO='<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="4" width=
 /* ===== Onboarding (không cần đăng ký) ===== */
 let OB=null;
 function onboarding(){
-  if(!OB){app.innerHTML=`<div class="ob"><section class="hero"><h1>Gia Sư Nhí</h1><p class="tag-l">Học cùng gia sư, tiến bộ mỗi ngày.</p><p class="muted" style="margin:0">Gia Sư Nhí giúp con hiểu bài, luyện tập và xây dựng thói quen học tập theo đúng khả năng của mình. Toán và Tiếng Việt lớp 1–5, theo sách Kết nối tri thức.</p></section>
-    <div class="feat"><div><span>🧭</span>Gia sư từng bước</div><div><span>✏️</span>Luyện tập thích ứng</div><div><span>🔁</span>Ôn lại lỗi sai</div><div><span>📊</span>Theo dõi tiến bộ</div></div>
+  if(!OB){app.innerHTML=`<div class="ob land"><div class="land-l"><section class="hero"><h1>Gia Sư Nhí</h1><p class="tag-l">Học cùng gia sư, tiến bộ mỗi ngày.</p><p class="muted" style="margin:0">Gia Sư Nhí giúp con hiểu bài, luyện tập và xây dựng thói quen học tập theo đúng khả năng của mình. Toán và Tiếng Việt lớp 1–5, theo sách Kết nối tri thức.</p></section>
     <button class="btn primary block" id="obgo">Bắt đầu học miễn phí</button>
-    <p class="muted small" style="margin:0">Không cần đăng ký. Không thu thập thông tin cá nhân. Kết quả lưu trên máy này.${S.kids.length?'':' Đã có mã sao lưu? Vào mục Hồ sơ sau khi bắt đầu để khôi phục.'}</p></div>`;
+    <p class="muted small" style="margin:0">Không cần đăng ký. Không thu thập thông tin cá nhân. Kết quả lưu trên máy này.${S.kids.length?'':' Đã có mã sao lưu? Vào mục Hồ sơ sau khi bắt đầu để khôi phục.'}</p></div>
+    <div class="land-r"><div class="preview" aria-hidden="true"><div class="msg">${BOT}<div class="bub"><span class="eyebrow">Toán · Lớp 5</span><div class="problem" style="margin-top:4px"><b>${frac(2,3)} + ${frac(1,4)} = ?</b></div><div style="margin-top:6px">Đây là bài mình làm cùng nhau nhé. 3 và 4 có thể cùng quy về số nào?</div></div></div><div class="pv-choices"><span>7</span><span>10</span><span class="on">12</span></div><div class="msg ok">${BOT}<div class="bub">🎉 Chính xác! 3 × 4 = 12. Giờ con thử đổi ${frac(2,3)} thành phân số có mẫu số 12 nhé.</div></div></div>
+    <div class="feat"><div><span>🧭</span>Gia sư từng bước</div><div><span>✏️</span>Luyện tập thích ứng</div><div><span>🔁</span>Ôn lại lỗi sai</div><div><span>📊</span>Theo dõi tiến bộ</div></div></div></div>`;
     $('#obgo').onclick=()=>{OB={step:1,grade:null,subjects:['toan','tv'],goal:null,pref:null,name:'',daily:2};onboarding()};
-    if(S.kids.some(x=>x.onboarded)){const b=document.createElement('button');b.className='btn ghost block';b.textContent='Quay lại hồ sơ đã có';b.onclick=()=>{S.kids=S.kids.filter(x=>x.onboarded);S.active=S.kids[0].id;save();render()};app.querySelector('.ob').appendChild(b)}
+    if(S.kids.some(x=>x.onboarded)){const b=document.createElement('button');b.className='btn ghost block';b.textContent='Quay lại hồ sơ đã có';b.onclick=()=>{S.kids=S.kids.filter(x=>x.onboarded);S.active=S.kids[0].id;save();render()};app.querySelector('.land-l').appendChild(b)}
     return}
   const s=OB.step,tot=5;const bar=`<div class="steps">${[1,2,3,4,5].map(i=>`<i class="${i<=s?'on':''}"></i>`).join('')}</div>`;
   const opt=(val,label,sel,sub)=>`<button class="opt" data-v="${esc(val)}" aria-pressed="${sel}">${label}${sub?`<small>${sub}</small>`:''}</button>`;
@@ -1276,14 +1314,16 @@ function home(){
   const greet=d.sess.length?(tc>=k.daily?`Con đã đạt mục tiêu hôm nay. Giỏi lắm!`:'Hôm nay con nên học gì? Gia Sư Nhí gợi ý cho con nhé.'):'Mình bắt đầu bài học đầu tiên nhé!';
   const lastS=d.sess.slice(-3).reverse();
   const g=GUIDES.find(x=>rp.some(o=>x.skills.includes(o.sk)))||GUIDES.find(x=>x.g===k.grade&&k.subjects.includes(x.sub));
-  app.innerHTML=`<div class="page"><div class="stack" style="max-width:760px">
-  <section class="hello"><h1>Chào ${esc(k.name)} 👋</h1><p class="muted" style="margin:0">${greet}</p></section>
-  <div class="goalrow"><div class="stat"><b>${Math.min(tc,k.daily)}/${k.daily}</b><span>bài hôm nay</span><div class="bar green" style="margin-top:6px"><i style="width:${Math.min(100,tc/k.daily*100)}%"></i></div></div><div class="stat"><b>🔥 ${st}</b><span>ngày liên tiếp</span></div><div class="stat"><b>⭐ ${lv.xp}</b><span>${esc(lv.name)} · cấp ${lv.i}</span></div></div>
-  ${main?`<section class="rec"><span class="eyebrow">${main.kind==='review'?'Nên ôn lại':main.kind==='spaced'?'Ôn để nhớ lâu':main.kind==='continue'?'Học tiếp':'Gợi ý hôm nay'}</span><h2>${esc(main.title)}</h2><p>${esc(main.sub)}</p><div class="meta"><span>⏱ ${main.mins} phút</span><span>${main.kind==='review'||main.kind==='spaced'?'5 câu':'10 câu'}</span></div><button class="btn" id="go0">Học ngay</button></section>`:`<section class="card empty"><b>Con đã học hết các bài của lớp ${k.grade}!</b>Hãy vào Luyện tập để làm thử thách nhé.</section>`}
-  <div class="quick"><button class="qa" onclick="${g?`startGuide('${g.id}')`:"go('tutor')"}"><span class="ic v">🧭</span>Học cùng gia sư</button><button class="qa" onclick="quickPractice()"><span class="ic p">⚡</span>Luyện nhanh 5 phút</button><button class="qa" onclick="go('mistakes')"><span class="ic a">🔁</span>Ôn lỗi sai${rp.length?`<span class="cnt">${rp.length}</span>`:''}</button></div>
-  ${others.length?`<div class="sec-h"><h2>Gợi ý khác</h2><a href="#learn">Xem tất cả bài</a></div><div class="reclist">${others.map((r,i)=>`<button class="ritem" data-ri="${i+1}"><span class="ic">${r.kind==='review'?'🔁':r.kind==='spaced'?'🧠':'📘'}</span><span class="t"><b>${esc(r.title)}</b><small>${esc(r.sub)}</small></span>${ico('chev','chev')}</button>`).join('')}</div>`:''}
-  <div class="sec-h"><h2>Hoạt động gần đây</h2>${d.sess.length?'<a href="#progress">Xem tiến bộ</a>':''}</div>
-  ${lastS.length?`<div class="reclist">${lastS.map(s=>`<div class="ritem"><span class="ic">${s.score>=9?'⭐':s.score>=7?'👍':'💪'}</span><span class="t"><b>${esc(s.title)}</b><small>${fdate(s.t)} · ${s.ok}/${s.n} câu đúng ngay</small></span><b style="color:var(--red);font-family:var(--f-display);font-size:1.15rem">${vn(s.score)}</b></div>`).join('')}</div>`:`<div class="card empty"><b>Con chưa có dữ liệu học tập.</b>Hãy hoàn thành bài học đầu tiên nhé! 🚀</div>`}
+  const recCard=main?`<section class="rec ha-rec"><span class="eyebrow">${main.kind==='review'?'Nên ôn lại':main.kind==='spaced'?'Ôn để nhớ lâu':main.kind==='continue'?'Học tiếp':'Gợi ý hôm nay'}</span><h2>${esc(main.title)}</h2><p>${esc(main.sub)}</p><div class="meta"><span>⏱ ${main.mins} phút</span><span>${main.kind==='review'||main.kind==='spaced'?'5 câu':'10 câu'}</span></div><button class="btn" id="go0">Học ngay</button></section>`:`<section class="card empty ha-rec"><b>Con đã học hết các bài của lớp ${k.grade}!</b>Hãy vào Luyện tập để làm thử thách nhé.</section>`;
+  app.innerHTML=`<div class="page"><div class="homegrid">
+  <section class="hello ha-hello"><h1>Chào ${esc(k.name)} 👋</h1><p class="muted" style="margin:0">${greet}</p></section>
+  <div class="ha-stats"><div class="goalrow"><div class="stat"><b>${Math.min(tc,k.daily)}/${k.daily}</b><span>bài hôm nay</span><div class="bar green" style="margin-top:6px"><i style="width:${Math.min(100,tc/k.daily*100)}%"></i></div></div><div class="stat"><b>🔥 ${st}</b><span>ngày liên tiếp</span></div><div class="stat"><b>⭐ ${lv.xp}</b><span>${esc(lv.name)} · cấp ${lv.i}</span></div></div>
+    ${d.sess.length?`<div class="comment ha-comment"><div class="eyebrow">Nhận xét tự động</div><div style="margin-top:4px">${esc(autoComment())}</div></div>`:''}</div>
+  ${recCard}
+  <div class="quick ha-quick"><button class="qa" onclick="${g?`startGuide('${g.id}')`:"go('tutor')"}"><span class="ic v">🧭</span>Học cùng gia sư</button><button class="qa" onclick="quickPractice()"><span class="ic p">⚡</span>Luyện nhanh 5 phút</button><button class="qa" onclick="go('mistakes')"><span class="ic a">🔁</span>Ôn lỗi sai${rp.length?`<span class="cnt">${rp.length}</span>`:''}</button></div>
+  <div class="ha-others">${others.length?`<div class="sec-h"><h2>Gợi ý khác</h2><a href="#learn">Xem tất cả bài</a></div><div class="reclist">${others.map((r,i)=>`<button class="ritem" data-ri="${i+1}"><span class="ic">${r.kind==='review'?'🔁':r.kind==='spaced'?'🧠':'📘'}</span><span class="t"><b>${esc(r.title)}</b><small>${esc(r.sub)}</small></span>${ico('chev','chev')}</button>`).join('')}</div>`:''}</div>
+  <div class="ha-recent"><div class="sec-h"><h2>Hoạt động gần đây</h2>${d.sess.length?'<a href="#progress">Xem tiến bộ</a>':''}</div>
+  ${lastS.length?`<div class="reclist">${lastS.map(s=>`<div class="ritem"><span class="ic">${s.score>=9?'⭐':s.score>=7?'👍':'💪'}</span><span class="t"><b>${esc(s.title)}</b><small>${fdate(s.t)} · ${s.ok}/${s.n} câu đúng ngay</small></span><b style="color:var(--red);font-family:var(--f-display);font-size:1.15rem">${vn(s.score)}</b></div>`).join('')}</div>`:`<div class="card empty"><b>Con chưa có dữ liệu học tập.</b>Hãy hoàn thành bài học đầu tiên nhé! 🚀</div>`}</div>
   </div></div>`;
   const b0=$('#go0');if(b0)b0.onclick=()=>startRec(main);
   app.querySelectorAll('[data-ri]').forEach(b=>b.onclick=()=>startRec(recs[+b.dataset.ri]));
