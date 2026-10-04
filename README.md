@@ -2,7 +2,7 @@
 
 Web app luyện Toán và Tiếng Việt lớp 1–5 (theo chương trình GDPT 2018), dùng trên điện thoại, gửi link qua Zalo.
 
-- Toán: 25 dạng bài, đề sinh tự động. Tiếng Việt: 13 dạng bài soạn sẵn.
+- Toán: 345 bài theo đúng chủ đề, tên bài SGK Kết nối tri thức lớp 1–5, đề sinh tự động. Tiếng Việt: 59 bài theo mạch kiến thức Chương trình GDPT 2018, câu hỏi và bài đọc tự soạn.
 - Sai lần 1 có gợi ý, sai lần 2 có lời giải. Chấm điểm thang 10.
 - Khu vực phụ huynh: theo dõi tiến độ, sao chép báo cáo gửi Zalo.
 - Không đăng ký, không thu thập thông tin cá nhân. Kết quả lưu trên trình duyệt của từng máy.
