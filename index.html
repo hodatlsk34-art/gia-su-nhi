@@ -1,0 +1,576 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Gia sư Toán và Tiếng Việt lớp 1–5: luyện tập có gợi ý từng bước, chấm điểm và báo cáo cho phụ huynh. Miễn phí, không cần đăng ký.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gia Sư Nhí – Luyện Toán, Tiếng Việt lớp 1–5">
+<meta property="og:description" content="Bé làm bài, sai thì có gợi ý, xong có điểm và lời phê. Miễn phí, không cần đăng ký.">
+<meta property="og:image" content="https://gia-su-nhi.onrender.com/og.png">
+<meta name="theme-color" content="#5b3db5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='4' width='26' height='24' rx='5' fill='%235b3db5'/%3E%3Cpath d='M8 4v24' stroke='%23f2a7a2' stroke-width='2'/%3E%3Cpath d='M12 12h12M12 17h12M12 22h8' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}</style>
+<title>Gia Sư Nhí</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: một cột kiểu "vở ô ly" — trang giấy kẻ ô với lề đỏ, mực tím cho chữ nhấn, bút đỏ để chấm điểm */
+:root{
+  --paper:#f3f5fb; --sheet:#ffffff; --line:#e3e8f5; --line-strong:#c9d3ee; --margin:#f2a7a2;
+  --ink:#1d2040; --muted:#5a6085; --rule:#dfe3f0;
+  --accent:#5b3db5; --accent-ink:#ffffff; --accent-soft:#eee9fb;
+  --red:#d2372c; --red-soft:#fdeceb;
+  --green:#1d8549; --green-soft:#e2f4e9;
+  --amber:#9a5b00; --amber-soft:#fff2d9; --amber-line:#f0c46d;
+  --shadow:0 1px 2px rgba(29,32,64,.06),0 6px 18px rgba(29,32,64,.06);
+  --f-display:"Baloo 2","Be Vietnam Pro",system-ui,sans-serif;
+  --f-body:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --radius:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#141728; --sheet:#1c2036; --line:#252a45; --line-strong:#323a5e; --margin:#7a3a3d;
+  --ink:#e9ebf7; --muted:#a6abc9; --rule:#2d3352;
+  --accent:#b9a6ff; --accent-ink:#1a1433; --accent-soft:#2a2550;
+  --red:#ff7b70; --red-soft:#3b1f24; --green:#62d394; --green-soft:#16321f;
+  --amber:#f3b956; --amber-soft:#382a12; --amber-line:#7a5a1e;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#141728; --sheet:#1c2036; --line:#252a45; --line-strong:#323a5e; --margin:#7a3a3d;
+  --ink:#e9ebf7; --muted:#a6abc9; --rule:#2d3352;
+  --accent:#b9a6ff; --accent-ink:#1a1433; --accent-soft:#2a2550;
+  --red:#ff7b70; --red-soft:#3b1f24; --green:#62d394; --green-soft:#16321f;
+  --amber:#f3b956; --amber-soft:#382a12; --amber-line:#7a5a1e;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.25); color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--f-body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding-inline:16px;padding-block:0 40px}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:8px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.15;text-wrap:balance;margin:0}
+.muted{color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.top .wrap{display:flex;align-items:center;gap:10px;padding-block:10px}
+.brand{display:flex;align-items:center;gap:8px;font:800 1.3rem/1 var(--f-display);color:var(--accent);background:none;border:0;padding:0}
+.brand svg{width:30px;height:30px}
+.spacer{flex:1}
+.chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:6px 12px;font-weight:600;font-size:.9rem;min-height:38px}
+.chip .g{background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 8px;font-size:.8rem}
+.icon-btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:6px 12px;min-height:38px;font-size:.9rem;font-weight:600}
+.icon-btn svg{width:18px;height:18px}
+@media(max-width:430px){.icon-btn .lbl{display:none}.brand{font-size:1.15rem}}
+
+/* home */
+.hello{display:grid;gap:4px;padding-block:22px 6px}
+.hello h1{font-size:clamp(1.7rem,5vw,2.3rem)}
+.grades{display:flex;gap:8px;flex-wrap:wrap;margin-block:14px 6px}
+.grades button{border:1.5px solid var(--rule);background:var(--sheet);border-radius:12px;padding:8px 14px;font:700 1rem var(--f-display);min-width:72px}
+.grades button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.subjects{display:grid;gap:18px;margin-top:14px}
+@media(min-width:680px){.subjects{grid-template-columns:1fr 1fr}}
+.subj h2{font-size:1.25rem;display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.subj h2 .tag{font:600 .75rem var(--f-body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.topics{display:grid;gap:8px;list-style:none;margin:0;padding:0}
+.topic{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:var(--sheet);border:1px solid var(--rule);border-radius:var(--radius);padding:12px 14px;box-shadow:var(--shadow);transition:transform .12s,border-color .12s}
+.topic:hover{border-color:var(--accent);transform:translateY(-1px)}
+.topic .t{flex:1;min-width:0;font-weight:600}
+.topic .t small{display:block;font-weight:400;color:var(--muted);font-size:.82rem}
+.score-badge{font:800 1.05rem/1 var(--f-display);color:var(--red);min-width:42px;text-align:center;border:2px solid currentColor;border-radius:50%;width:44px;height:44px;display:grid;place-items:center;transform:rotate(-6deg)}
+.score-badge.none{color:var(--line-strong);border-style:dashed;font-size:.8rem}
+.note{margin-top:22px;font-size:.88rem;color:var(--muted);border-top:1px dashed var(--rule);padding-top:14px}
+
+/* quiz */
+.qbar{display:flex;align-items:center;gap:10px;padding-block:14px 8px}
+.qbar .ttl{flex:1;min-width:0;font-weight:600;font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.track{display:flex;gap:4px;margin-bottom:12px}
+.track i{flex:1;height:7px;border-radius:4px;background:var(--line-strong)}
+.track i.ok{background:var(--green)} .track i.half{background:var(--amber)} .track i.no{background:var(--red)} .track i.cur{background:var(--accent)}
+.sheet{position:relative;background-color:var(--sheet);border:1px solid var(--rule);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 18px 22px 56px;min-height:180px;
+  background-image:linear-gradient(90deg,transparent 0 38px,var(--margin) 38px 39.5px,transparent 39.5px),linear-gradient(var(--line-strong) 1px,transparent 1px),linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:100% 100%,100% 32px,100% 8px,32px 100%;background-position:0 0,0 6px,0 6px,6px 0}
+.qno{position:absolute;left:8px;top:22px;width:24px;text-align:center;font:800 1rem var(--f-display);color:var(--red)}
+.qlead{font-weight:600;color:var(--muted);margin-bottom:6px}
+.qtext{font-size:1.15rem;font-weight:500;line-height:1.6}
+.qeq{font:800 clamp(2.1rem,9vw,3.2rem)/1.2 var(--f-display);color:var(--accent);letter-spacing:.01em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.word{font:700 clamp(1.9rem,8vw,2.6rem)/1.2 var(--f-display);color:var(--accent)}
+.gap{display:inline-block;min-width:1.6em;border-bottom:3px dotted var(--red);color:var(--red);text-align:center}
+.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin-inline:.15em;line-height:1}
+.frac span:first-child{border-bottom:.08em solid currentColor;padding:0 .2em .06em}
+.frac span:last-child{padding-top:.06em}
+.box{display:inline-block;margin-inline:.35em;color:var(--red)}
+.say{display:inline-flex;align-items:center;gap:6px;margin-top:14px;border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:6px 12px;font-size:.88rem;font-weight:600;color:var(--accent)}
+.say svg{width:18px;height:18px}
+.answer{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}
+.answer input{width:min(220px,100%);font:800 1.8rem var(--f-display);text-align:center;padding:8px 12px;border:2px solid var(--line-strong);border-radius:12px;background:var(--sheet);font-variant-numeric:tabular-nums}
+.answer input:focus{border-color:var(--accent);outline:none}
+.answer .unit{font-weight:600;color:var(--muted)}
+.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(140px,100%),1fr));gap:10px;margin-top:16px}
+.choices.long{grid-template-columns:1fr}
+.choices.syms{grid-template-columns:repeat(3,1fr)}
+.choice{min-height:56px;border:2px solid var(--line-strong);background:var(--sheet);border-radius:12px;padding:10px 14px;font-weight:600;font-size:1.05rem;text-align:center;transition:border-color .12s,background .12s}
+.choices.long .choice{text-align:left;font-weight:500}
+.choice.sym{font:800 2rem/1 var(--f-display)}
+.choice:hover:not(:disabled){border-color:var(--accent)}
+.choice:disabled{cursor:default}
+.choice.wrong{border-color:var(--red);background:var(--red-soft);color:var(--red);text-decoration:line-through}
+.choice.right{border-color:var(--green);background:var(--green-soft);color:var(--green)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.btn{border:0;border-radius:12px;padding:12px 20px;font-weight:700;font-size:1rem;min-height:48px}
+.btn.primary{background:var(--accent);color:var(--accent-ink)}
+.btn.ghost{background:transparent;border:1.5px solid var(--rule)}
+.btn.danger{background:var(--red);color:#fff}
+.fb{margin-top:16px;border-radius:12px;padding:12px 14px;border:1.5px solid;display:grid;gap:6px}
+.fb b{font-family:var(--f-display);font-size:1.15rem}
+.fb.ok{background:var(--green-soft);border-color:var(--green);color:var(--ink)} .fb.ok b{color:var(--green)}
+.fb.hint{background:var(--amber-soft);border-color:var(--amber-line)} .fb.hint b{color:var(--amber)}
+.fb.bad{background:var(--red-soft);border-color:var(--red)} .fb.bad b{color:var(--red)}
+.col{font:600 1.2rem/1.25 ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;margin:4px 0 0;color:var(--accent);overflow-x:auto}
+.dots{display:inline-flex;flex-wrap:wrap;gap:5px;margin-right:12px;vertical-align:middle;max-width:150px}
+.dots i{width:16px;height:16px;border-radius:50%;background:var(--accent)}
+.dots.alt i{background:var(--green)}
+.dots.gone i{background:transparent;border:2px dashed var(--red)}
+@keyframes pop{0%{transform:scale(.96)}60%{transform:scale(1.02)}100%{transform:scale(1)}}
+.pop{animation:pop .25s ease-out}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* result */
+.result{display:grid;gap:18px;padding-top:18px}
+.grade-card{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.mark{width:118px;height:118px;border:4px solid var(--red);border-radius:50%;display:grid;place-items:center;color:var(--red);transform:rotate(-8deg);flex:none}
+.mark span{font:800 2.6rem/1 var(--f-display)}
+.mark small{display:block;text-align:center;font:600 .75rem var(--f-body);letter-spacing:.08em;text-transform:uppercase}
+.loi-phe{flex:1;min-width:0}
+.loi-phe .lbl{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.loi-phe p{margin:4px 0 0;font:700 1.35rem/1.35 var(--f-display);color:var(--red)}
+.stars{display:flex;gap:4px;margin-top:6px}
+.stars svg{width:28px;height:28px}
+.review{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.review li{display:flex;gap:10px;align-items:flex-start;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:10px 12px}
+.review .st{flex:none;font:800 .95rem var(--f-display);width:26px;height:26px;border-radius:50%;display:grid;place-items:center}
+.review .st.ok{background:var(--green-soft);color:var(--green)} .review .st.half{background:var(--amber-soft);color:var(--amber)} .review .st.no{background:var(--red-soft);color:var(--red)}
+.review .q{min-width:0;flex:1}
+.review .q small{display:block;color:var(--muted)}
+
+/* parent */
+.panel{background:var(--sheet);border:1px solid var(--rule);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.stack{display:grid;gap:16px;padding-top:18px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.field{display:grid;gap:4px;flex:1;min-width:140px}
+.field label{font-size:.85rem;font-weight:600;color:var(--muted)}
+.field input,.field select{border:1.5px solid var(--line-strong);border-radius:10px;padding:10px 12px;background:var(--sheet);min-height:46px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.kpi{border:1px solid var(--rule);border-radius:12px;padding:10px 12px}
+.kpi b{display:block;font:800 1.6rem/1.1 var(--f-display);font-variant-numeric:tabular-nums}
+.kpi span{font-size:.8rem;color:var(--muted)}
+.tbl-wrap{overflow-x:auto;margin-inline:-4px}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pill{display:inline-block;border-radius:999px;padding:2px 9px;font-size:.78rem;font-weight:700}
+.pill.warn{background:var(--amber-soft);color:var(--amber)} .pill.good{background:var(--green-soft);color:var(--green)}
+.kids{display:grid;gap:8px}
+.kid{display:flex;align-items:center;gap:10px;border:1px solid var(--rule);border-radius:12px;padding:8px 10px}
+.kid.on{border-color:var(--accent);background:var(--accent-soft)}
+.kid .nm{flex:1;min-width:0;font-weight:600}
+.small-btn{border:1px solid var(--rule);background:var(--sheet);border-radius:9px;padding:6px 10px;font-size:.85rem;font-weight:600;min-height:36px}
+.confirm{border:1.5px solid var(--red);background:var(--red-soft);border-radius:12px;padding:12px;display:grid;gap:10px}
+textarea{width:100%;min-height:160px;border:1.5px solid var(--line-strong);border-radius:10px;padding:10px;background:var(--sheet);font:.85rem/1.5 var(--f-body)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:999px;font-weight:600;font-size:.9rem;z-index:20;max-width:calc(100% - 32px)}
+
+/* sheet overlay */
+.overlay{position:fixed;inset:0;background:rgba(10,12,30,.45);z-index:10;display:grid;align-items:end;justify-items:center}
+.overlay .panel{width:min(520px,100%);border-radius:18px 18px 0 0;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px));display:grid;gap:12px;max-height:85vh;overflow:auto}
+@media(min-width:600px){.overlay{align-items:center}.overlay .panel{border-radius:18px}}
+</style>
+
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <button class="brand" id="brand" aria-label="Về trang chủ">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="4" width="26" height="24" rx="5" fill="var(--accent)"/><path d="M8 4v24" stroke="var(--margin)" stroke-width="2"/><path d="M12 12h12M12 17h12M12 22h8" stroke="var(--accent-ink)" stroke-width="2" stroke-linecap="round" opacity=".85"/></svg>
+      Gia Sư Nhí
+    </button>
+    <span class="spacer"></span>
+    <button class="chip" id="kidChip" aria-label="Đổi bé"></button>
+    <button class="icon-btn" id="parentBtn" aria-label="Khu vực phụ huynh">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+      <span class="lbl">Phụ huynh</span>
+    </button>
+  </div>
+</header>
+<main class="wrap" id="app"></main>
+<div id="overlay" class="overlay" hidden></div>
+<div id="toast" class="toast" hidden role="status"></div>
+
+<script>
+/* ===== Gia Sư Nhí — nội dung bài tập (Toán sinh đề tự động, Tiếng Việt ngân hàng câu hỏi) ===== */
+const R=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const fmt=n=>{const neg=n<0;n=Math.abs(Math.round(n*1000)/1000);let [i,d]=String(n).split('.');if(i.length>4)i=i.replace(/\B(?=(\d{3})+(?!\d))/g,' ');return (neg?'−':'')+i+(d?','+d:'')};
+const sayMath=s=>s.replace(/ /g,'').replace(/,/g,' phẩy ').replace(/×/g,' nhân ').replace(/ : /g,' chia ').replace(/\+/g,' cộng ').replace(/−/g,' trừ ').replace(/=/g,' bằng ').replace(/\?/g,' bao nhiêu ').replace(/>/g,' lớn hơn ').replace(/</g,' bé hơn ');
+const NAMES=['Lan','Minh','An','Bình','Hoa','Nam','Mai','Tú','Hà','Khoa'];
+const dots=(n,c)=>'<span class="dots '+(c||'')+'">'+'<i></i>'.repeat(n)+'</span>';
+const frac=(a,b)=>`<span class="frac"><span>${a}</span><span>${b}</span></span>`;
+const fracTxt=(a,b)=>`${a} phần ${b}`;
+const CMP=['>','<','='];
+const cmp=(x,y)=>x>y?'>':x<y?'<':'=';
+/* đặt tính cột dọc (số tự nhiên) */
+const col=(a,b,op,res)=>{const w=Math.max(String(a).length,String(b).length,String(res).length)+1;const p=s=>String(s).padStart(w,' ');return `<pre class="col" aria-hidden="true">${p(a)}\n${op}${p(b).slice(1)}\n${'‾'.repeat(w)}\n${p(res)}</pre>`};
+const eq=(e,o)=>Object.assign({eq:e,speak:sayMath(e)},o);
+
+const TOPICS=[
+/* ---------------- LỚP 1 — TOÁN ---------------- */
+{id:'m1a',grade:1,sub:'toan',name:'Cộng trong phạm vi 10',gen(){const a=R(1,9),b=R(0,10-a),big=Math.max(a,b),sm=Math.min(a,b);return eq(`${a} + ${b} = ?`,{answer:a+b,hint:`Bắt đầu từ ${big}, đếm thêm ${sm} nữa.`,hintHtml:dots(a)+dots(b,'alt'),explain:`${a} + ${b} = ${a+b}`})}},
+{id:'m1b',grade:1,sub:'toan',name:'Trừ trong phạm vi 10',gen(){const a=R(2,10),b=R(0,a);return eq(`${a} − ${b} = ?`,{answer:a-b,hint:`Có ${a}, bớt đi ${b}. Đếm lùi ${b} bước từ ${a}.`,hintHtml:dots(a-b)+dots(b,'gone'),explain:`${a} − ${b} = ${a-b}`})}},
+{id:'m1c',grade:1,sub:'toan',name:'Cộng, trừ không nhớ trong phạm vi 100',gen(){
+  if(Math.random()<.5){const ta=R(1,8),tb=R(0,9-ta),ua=R(0,9),ub=R(0,9-ua),a=ta*10+ua,b=tb*10+ub;return eq(`${a} + ${b} = ?`,{answer:a+b,hint:'Đặt tính thẳng cột: đơn vị thẳng đơn vị, chục thẳng chục. Tính từ phải sang trái.',explain:`Đơn vị: ${ua} + ${ub} = ${ua+ub}. Chục: ${ta} + ${tb} = ${ta+tb}. Vậy ${a} + ${b} = ${a+b}.`,col:col(a,b,'+',a+b)})}
+  const ta=R(1,9),tb=R(0,ta),ua=R(0,9),ub=R(0,ua),a=ta*10+ua,b=tb*10+ub;return eq(`${a} − ${b} = ?`,{answer:a-b,hint:'Đặt tính thẳng cột rồi trừ từ phải sang trái: hàng đơn vị trước, hàng chục sau.',explain:`Đơn vị: ${ua} − ${ub} = ${ua-ub}. Chục: ${ta} − ${tb} = ${ta-tb}. Vậy ${a} − ${b} = ${a-b}.`,col:col(a,b,'−',a-b)})}},
+{id:'m1d',grade:1,sub:'toan',name:'So sánh số trong phạm vi 100',gen(){const a=R(0,99);let b=Math.random()<.25?a:R(0,99);if(Math.random()<.4&&a>9)b=Math.floor(a/10)*10+R(0,9);return {eq:`${a} ☐ ${b}`,speak:`So sánh ${a} và ${b}. Chọn dấu lớn hơn, bé hơn hoặc bằng.`,kind:'choice',keep:true,choices:CMP,answer:cmp(a,b),hint:'So sánh hàng chục trước. Nếu hàng chục bằng nhau thì so sánh hàng đơn vị.',explain:`${a} ${cmp(a,b)} ${b}`}}},
+{id:'m1e',grade:1,sub:'toan',name:'Bài toán có lời văn',gen(){const n=pick(NAMES),o=pick(['quả táo','cái kẹo','bông hoa','quyển vở','viên bi']),t=R(0,2);
+  if(t===0){const a=R(1,8),b=R(1,10-a);return {text:`${n} có ${a} ${o}, mẹ cho ${n} thêm ${b} ${o}. Hỏi ${n} có tất cả bao nhiêu ${o}?`,unit:o,answer:a+b,hint:'Được cho thêm thì nhiều lên, ta làm phép cộng.',explain:`${a} + ${b} = ${a+b} (${o})`}}
+  if(t===1){const a=R(3,10),b=R(1,a-1);return {text:`Trên cành có ${a} con chim, ${b} con bay đi. Hỏi trên cành còn lại bao nhiêu con chim?`,unit:'con chim',answer:a-b,hint:'Bay đi thì ít đi, ta làm phép trừ.',explain:`${a} − ${b} = ${a-b} (con chim)`}}
+  const a=R(1,6),b=R(1,10-a);return {text:`Tổ em có ${a} bạn nam và ${b} bạn nữ. Hỏi tổ em có tất cả bao nhiêu bạn?`,unit:'bạn',answer:a+b,hint:'Gộp số bạn nam và số bạn nữ lại, ta làm phép cộng.',explain:`${a} + ${b} = ${a+b} (bạn)`}}},
+
+/* ---------------- LỚP 2 — TOÁN ---------------- */
+{id:'m2a',grade:2,sub:'toan',name:'Cộng có nhớ trong phạm vi 100',gen(){let ta,tb,ua,ub;do{ta=R(1,8);tb=R(1,9-ta);ua=R(1,9);ub=R(10-ua,9)}while((ta+tb)*10+ua+ub>100);const a=ta*10+ua,b=tb*10+ub,s=a+b,u=ua+ub;return eq(`${a} + ${b} = ?`,{answer:s,hint:'Cộng hàng đơn vị trước. Được 10 trở lên thì viết chữ số hàng đơn vị và nhớ 1 sang hàng chục.',explain:`${ua} + ${ub} = ${u}, viết ${u%10}, nhớ 1. ${ta} + ${tb} = ${ta+tb}, thêm 1 bằng ${ta+tb+1}, viết ${ta+tb+1}. Vậy ${a} + ${b} = ${s}.`,col:col(a,b,'+',s)})}},
+{id:'m2b',grade:2,sub:'toan',name:'Trừ có nhớ trong phạm vi 100',gen(){let ta,tb,ua,ub;do{ta=R(2,9);tb=R(0,ta-1);ua=R(0,8);ub=R(ua+1,9)}while(false);const a=ta*10+ua,b=tb*10+ub,d=a-b;return eq(`${a} − ${b} = ?`,{answer:d,hint:'Hàng đơn vị không trừ được thì lấy thêm 10 (mượn 1 chục), trừ xong nhớ trả 1 ở hàng chục.',explain:`${ua} không trừ được ${ub}, lấy ${ua+10} trừ ${ub} bằng ${ua+10-ub}, viết ${ua+10-ub}, nhớ 1. ${tb} thêm 1 bằng ${tb+1}; ${ta} trừ ${tb+1} bằng ${ta-tb-1}. Vậy ${a} − ${b} = ${d}.`,col:col(a,b,'−',d)})}},
+{id:'m2c',grade:2,sub:'toan',name:'Bảng nhân 2 và bảng nhân 5',gen(){const a=pick([2,5]),b=R(1,10);return eq(`${a} × ${b} = ?`,{answer:a*b,hint:`${a} × ${b} nghĩa là ${b} lần số ${a}: cộng số ${a} với nhau ${b} lần.`,explain:`${a} × ${b} = ${Array(b).fill(a).join(' + ')} = ${a*b}`})}},
+{id:'m2d',grade:2,sub:'toan',name:'Bảng chia 2 và bảng chia 5',gen(){const d=pick([2,5]),q=R(1,10),n=d*q;return eq(`${n} : ${d} = ?`,{answer:q,hint:`Nhẩm ngược lại: ${d} nhân mấy thì bằng ${n}?`,explain:`Vì ${d} × ${q} = ${n} nên ${n} : ${d} = ${q}.`})}},
+{id:'m2e',grade:2,sub:'toan',name:'Bài toán nhiều hơn, ít hơn',gen(){const x=pick(NAMES),y=pick(NAMES.filter(v=>v!==x)),o=pick(['viên bi','quyển truyện','bông hoa','nhãn vở']);
+  if(Math.random()<.5){const a=R(12,60),b=R(3,30);return {text:`${x} có ${a} ${o}. ${y} có nhiều hơn ${x} ${b} ${o}. Hỏi ${y} có bao nhiêu ${o}?`,unit:o,answer:a+b,hint:'“Nhiều hơn” thì làm phép cộng.',explain:`${a} + ${b} = ${a+b} (${o})`}}
+  const a=R(25,90),b=R(3,a-5);return {text:`${x} có ${a} ${o}. ${y} có ít hơn ${x} ${b} ${o}. Hỏi ${y} có bao nhiêu ${o}?`,unit:o,answer:a-b,hint:'“Ít hơn” thì làm phép trừ.',explain:`${a} − ${b} = ${a-b} (${o})`}}},
+
+/* ---------------- LỚP 3 — TOÁN ---------------- */
+{id:'m3a',grade:3,sub:'toan',name:'Bảng nhân 2 đến 9',gen(){const a=R(2,9),b=R(1,10);return eq(`${a} × ${b} = ?`,{answer:a*b,hint:b>1?`Lấy kết quả của ${a} × ${b-1} rồi cộng thêm ${a}.`:`Số nào nhân với 1 cũng bằng chính nó.`,explain:`${a} × ${b} = ${a*b}`})}},
+{id:'m3b',grade:3,sub:'toan',name:'Bảng chia 2 đến 9',gen(){const d=R(2,9),q=R(1,10),n=d*q;return eq(`${n} : ${d} = ?`,{answer:q,hint:`Nhẩm: ${d} nhân mấy thì bằng ${n}?`,explain:`Vì ${d} × ${q} = ${n} nên ${n} : ${d} = ${q}.`})}},
+{id:'m3c',grade:3,sub:'toan',name:'Tìm thành phần chưa biết',gen(){const t=R(0,3);
+  if(t===0){const x=R(100,800),a=R(50,199);return eq(`? + ${a} = ${x+a}`,{answer:x,speak:`Số nào cộng ${a} bằng ${x+a}?`,hint:'Muốn tìm số hạng chưa biết, ta lấy tổng trừ đi số hạng đã biết.',explain:`? = ${x+a} − ${a} = ${x}`})}
+  if(t===1){const x=R(200,900),a=R(20,x-50),b=x-a;return eq(`? − ${a} = ${b}`,{answer:x,speak:`Số nào trừ ${a} bằng ${b}?`,hint:'Muốn tìm số bị trừ, ta lấy hiệu cộng với số trừ.',explain:`? = ${b} + ${a} = ${x}`})}
+  if(t===2){const a=R(2,9),x=R(2,10);return eq(`${a} × ? = ${a*x}`,{answer:x,speak:`${a} nhân mấy bằng ${a*x}?`,hint:'Muốn tìm thừa số chưa biết, ta lấy tích chia cho thừa số đã biết.',explain:`? = ${a*x} : ${a} = ${x}`})}
+  const a=R(2,9),b=R(2,10);return eq(`? : ${a} = ${b}`,{answer:a*b,speak:`Số nào chia ${a} bằng ${b}?`,hint:'Muốn tìm số bị chia, ta lấy thương nhân với số chia.',explain:`? = ${b} × ${a} = ${a*b}`})}},
+{id:'m3d',grade:3,sub:'toan',name:'Cộng, trừ trong phạm vi 10 000',gen(){
+  if(Math.random()<.5){const a=R(1000,7999),b=R(100,9999-a);return eq(`${a} + ${b} = ?`,{answer:a+b,hint:'Đặt tính thẳng cột, cộng từ phải sang trái, nhớ sang hàng bên trái khi được 10 trở lên.',explain:`${a} + ${b} = ${a+b}`,col:col(a,b,'+',a+b)})}
+  const a=R(2000,9999),b=R(100,a-100);return eq(`${a} − ${b} = ?`,{answer:a-b,hint:'Đặt tính thẳng cột, trừ từ phải sang trái. Hàng nào không trừ được thì mượn 1 ở hàng bên trái.',explain:`${a} − ${b} = ${a-b}`,col:col(a,b,'−',a-b)})}},
+{id:'m3e',grade:3,sub:'toan',name:'Gấp lên, giảm đi một số lần',gen(){const k=R(2,6),a=R(3,15),x=pick(NAMES);
+  if(Math.random()<.5)return {text:`${x} có ${a} quả cam. Số cam của bà gấp ${k} lần số cam của ${x}. Hỏi bà có bao nhiêu quả cam?`,unit:'quả cam',answer:a*k,hint:'Gấp lên một số lần thì làm phép nhân.',explain:`${a} × ${k} = ${a*k} (quả cam)`};
+  return {text:`Trong vườn có ${a*k} cây cam. Số cây bưởi bằng số cây cam giảm đi ${k} lần. Hỏi trong vườn có bao nhiêu cây bưởi?`,unit:'cây bưởi',answer:a,hint:'Giảm đi một số lần thì làm phép chia.',explain:`${a*k} : ${k} = ${a} (cây bưởi)`}}},
+
+/* ---------------- LỚP 4 — TOÁN ---------------- */
+{id:'m4a',grade:4,sub:'toan',name:'Nhân với số có một chữ số',gen(){const a=R(1200,24999),b=R(2,9);return eq(`${fmt(a)} × ${b} = ?`,{answer:a*b,hint:'Đặt tính, nhân lần lượt từ phải sang trái. Phần nhớ cộng vào kết quả của hàng tiếp theo.',explain:`${fmt(a)} × ${b} = ${fmt(a*b)}`,col:col(a,b,'×',a*b)})}},
+{id:'m4b',grade:4,sub:'toan',name:'Chia cho số có một chữ số',gen(){const d=R(2,9),q=R(120,4999),n=d*q;return eq(`${fmt(n)} : ${d} = ?`,{answer:q,hint:`Chia lần lượt từ trái sang phải. Mỗi lần lấy phần còn lại hạ chữ số tiếp theo xuống rồi chia tiếp cho ${d}.`,explain:`${fmt(n)} : ${d} = ${fmt(q)} (thử lại: ${fmt(q)} × ${d} = ${fmt(n)})`})}},
+{id:'m4c',grade:4,sub:'toan',name:'Tìm số trung bình cộng',gen(){const n=R(3,4),avg=R(15,80);let xs;do{xs=[];for(let i=0;i<n-1;i++)xs.push(avg+R(-12,12));xs.push(avg*n-xs.reduce((s,v)=>s+v,0))}while(xs[n-1]<1);const sum=xs.reduce((s,v)=>s+v,0),av=sum/n;
+  return {text:`Tìm số trung bình cộng của các số: ${xs.join('; ')}.`,answer:av,hint:`Cộng tất cả các số lại rồi chia cho ${n} (vì có ${n} số).`,explain:`(${xs.join(' + ')}) : ${n} = ${sum} : ${n} = ${fmt(av)}`}}},
+{id:'m4d',grade:4,sub:'toan',name:'So sánh phân số',gen(){const t=R(0,2);let a,b,c,d,hint,ex;
+  if(t===0){b=d=R(3,12);a=R(1,b+3);c=R(1,b+3);hint='Hai phân số cùng mẫu số: phân số nào có tử số lớn hơn thì lớn hơn.';ex=`Cùng mẫu số ${b}, so sánh tử số ${a} và ${c}.`}
+  else if(t===1){a=c=R(1,9);b=R(2,12);do{d=R(2,12)}while(d===b);hint='Hai phân số cùng tử số: phân số nào có mẫu số bé hơn thì lớn hơn.';ex=`Cùng tử số ${a}, mẫu số ${b} ${b<d?'bé hơn':'lớn hơn'} ${d}.`}
+  else{b=R(2,6);const k=R(2,3);d=b*k;a=R(1,b*2);c=R(1,d*2);hint=`Hai mẫu số khác nhau: quy đồng mẫu số trước. Lấy ${b} × ${k} = ${d}.`;ex=`${fracTxt(a,b)} = ${fracTxt(a*k,d)}; so sánh tử số ${a*k} và ${c}.`}
+  const r=cmp(a*d,c*b);return {html:`${frac(a,b)}<span class="box">☐</span>${frac(c,d)}`,speak:`So sánh ${fracTxt(a,b)} và ${fracTxt(c,d)}.`,kind:'choice',keep:true,choices:CMP,answer:r,hint,explain:ex+` Vậy ${fracTxt(a,b)} ${r} ${fracTxt(c,d)}.`}}},
+{id:'m4e',grade:4,sub:'toan',name:'Đổi đơn vị đo',gen(){const U=[['kg','g',1000],['tấn','kg',1000],['tạ','kg',100],['yến','kg',10],['m','cm',100],['dm','cm',10],['km','m',1000],['giờ','phút',60],['phút','giây',60]];const [big,sm,k]=pick(U);const x=R(2,9);
+  if(Math.random()<.65)return eq(`${x} ${big} = ? ${sm}`,{speak:`${x} ${big} bằng bao nhiêu ${sm}?`,answer:x*k,unit:sm,hint:`1 ${big} = ${fmt(k)} ${sm}. Lấy ${x} nhân với ${fmt(k)}.`,explain:`${x} × ${fmt(k)} = ${fmt(x*k)}, vậy ${x} ${big} = ${fmt(x*k)} ${sm}.`});
+  return eq(`${fmt(x*k)} ${sm} = ? ${big}`,{speak:`${x*k} ${sm} bằng bao nhiêu ${big}?`,answer:x,unit:big,hint:`1 ${big} = ${fmt(k)} ${sm}. Lấy ${fmt(x*k)} chia cho ${fmt(k)}.`,explain:`${fmt(x*k)} : ${fmt(k)} = ${x}, vậy ${fmt(x*k)} ${sm} = ${x} ${big}.`})}},
+
+/* ---------------- LỚP 5 — TOÁN ---------------- */
+{id:'m5a',grade:5,sub:'toan',name:'Cộng, trừ số thập phân',gen(){const da=R(1,2),db=R(1,2),m=100;const A=R(105,9999)*(da===1?10:1),B=R(105,4999)*(db===1?10:1);
+  if(Math.random()<.5){return eq(`${fmt(A/m)} + ${fmt(B/m)} = ?`,{answer:(A+B)/m,hint:'Đặt tính sao cho các dấu phẩy thẳng cột với nhau, cộng như số tự nhiên, rồi đặt dấu phẩy thẳng cột ở kết quả.',explain:`${fmt(A/m)} + ${fmt(B/m)} = ${fmt((A+B)/m)}`})}
+  const hi=Math.max(A,B),lo=Math.min(A,B);if(hi===lo)return eq(`${fmt(hi/m)} − ${fmt(lo/m)} = ?`,{answer:0,hint:'Hai số bằng nhau.',explain:'Kết quả bằng 0.'});
+  return eq(`${fmt(hi/m)} − ${fmt(lo/m)} = ?`,{answer:(hi-lo)/m,hint:'Đặt tính sao cho các dấu phẩy thẳng cột. Nếu phần thập phân ít chữ số hơn, coi như viết thêm chữ số 0 vào bên phải.',explain:`${fmt(hi/m)} − ${fmt(lo/m)} = ${fmt((hi-lo)/m)}`})}},
+{id:'m5b',grade:5,sub:'toan',name:'Nhân số thập phân với số tự nhiên',gen(){const p=pick([10,100]),A=R(12,999),b=R(2,9);return eq(`${fmt(A/p)} × ${b} = ?`,{answer:A*b/p,hint:`Nhân như nhân số tự nhiên (${A} × ${b}), rồi đếm phần thập phân có ${p===10?'một':'hai'} chữ số để đặt dấu phẩy.`,explain:`${A} × ${b} = ${A*b}; tách ${p===10?'một':'hai'} chữ số ở phần thập phân: ${fmt(A*b/p)}.`})}},
+{id:'m5c',grade:5,sub:'toan',name:'Tỉ số phần trăm',gen(){
+  if(Math.random()<.55){const p=pick([5,10,15,20,25,30,40,50,75]),n=20*R(1,25);return {text:`Tìm ${p}% của ${n}.`,speak:`Tìm ${p} phần trăm của ${n}.`,answer:n*p/100,hint:`Lấy ${n} chia cho 100 rồi nhân với ${p}.`,explain:`${n} : 100 × ${p} = ${fmt(n*p/100)}`}}
+  const b=pick([20,25,40,50]),a=R(1,b-1),v=a/b*100;return {text:`Tìm tỉ số phần trăm của ${a} và ${b}.`,unit:'%',answer:v,hint:`Lấy ${a} chia cho ${b}, rồi nhân thương đó với 100 và viết thêm kí hiệu %.`,explain:`${a} : ${b} = ${fmt(a/b)}; ${fmt(a/b)} × 100 = ${fmt(v)}%`}}},
+{id:'m5d',grade:5,sub:'toan',name:'Diện tích các hình',gen(){const t=R(0,2);
+  if(t===0){const a=R(4,25),b=R(3,a);return {text:`Một hình chữ nhật có chiều dài ${a} cm, chiều rộng ${b} cm. Tính diện tích hình chữ nhật đó.`,unit:'cm²',answer:a*b,hint:'Diện tích hình chữ nhật = chiều dài × chiều rộng (cùng đơn vị đo).',explain:`${a} × ${b} = ${a*b} (cm²)`}}
+  if(t===1){const a=R(2,15)*2,h=R(3,20);return {text:`Một hình tam giác có độ dài đáy ${a} cm, chiều cao ${h} cm. Tính diện tích hình tam giác đó.`,unit:'cm²',answer:a*h/2,hint:'Diện tích hình tam giác = độ dài đáy × chiều cao : 2.',explain:`${a} × ${h} : 2 = ${a*h/2} (cm²)`}}
+  let a,b,h;do{a=R(6,20);b=R(3,a-1);h=R(2,12)}while(((a+b)*h)%2);return {text:`Một hình thang có độ dài hai đáy là ${a} cm và ${b} cm, chiều cao ${h} cm. Tính diện tích hình thang đó.`,unit:'cm²',answer:(a+b)*h/2,hint:'Diện tích hình thang = (đáy lớn + đáy bé) × chiều cao : 2.',explain:`(${a} + ${b}) × ${h} : 2 = ${(a+b)*h/2} (cm²)`}}},
+{id:'m5e',grade:5,sub:'toan',name:'Viết số đo dưới dạng số thập phân',gen(){const t=R(0,2);
+  if(t===0){const k=R(1,9),g=pick([500,250,750,50,200,125,5]);return eq(`${k} kg ${g} g = ? kg`,{speak:`${k} ki lô gam ${g} gam bằng bao nhiêu ki lô gam?`,unit:'kg',answer:k+g/1000,hint:'1 g = 0,001 kg. Phần gam viết thành phần thập phân có ba chữ số.',explain:`${g} g = ${fmt(g/1000)} kg, vậy ${k} kg ${g} g = ${fmt(k+g/1000)} kg.`})}
+  if(t===1){const k=R(1,9),c=pick([5,25,40,75,8,60,12]);return eq(`${k} m ${c} cm = ? m`,{speak:`${k} mét ${c} xăng ti mét bằng bao nhiêu mét?`,unit:'m',answer:k+c/100,hint:'1 cm = 0,01 m. Phần xăng-ti-mét viết thành phần thập phân có hai chữ số.',explain:`${c} cm = ${fmt(c/100)} m, vậy ${k} m ${c} cm = ${fmt(k+c/100)} m.`})}
+  const h=pick([0.5,1.5,2.5,0.25,0.75,1.25,3.5]);return eq(`${fmt(h)} giờ = ? phút`,{speak:`${fmt(h).replace(',',' phẩy ')} giờ bằng bao nhiêu phút?`,unit:'phút',answer:h*60,hint:'1 giờ = 60 phút. Lấy số giờ nhân với 60.',explain:`${fmt(h)} × 60 = ${h*60}, vậy ${fmt(h)} giờ = ${h*60} phút.`})}},
+];
+
+/* ---------------- TIẾNG VIỆT — ngân hàng câu hỏi ---------------- */
+const blank=s=>s.replace('_','<b class="gap">…</b>');
+const TV=[
+{id:'t1a',grade:1,sub:'tv',name:'Chính tả c hay k',choices:['c','k'],hint:'Viết k khi đứng trước e, ê, i. Các trường hợp còn lại viết c.',
+ items:[['con _á','c'],['con _ò','c'],['cái _ẹo','k'],['con _iến','k'],['_ổ áo','c'],['que _em','k'],['con _ua','c'],['cái _éo','k'],['_ể chuyện','k'],['bát _ơm','c'],['_ính râm','k'],['quả _am','c']],
+ word:(s,a)=>s.replace('_',a)},
+{id:'t1b',grade:1,sub:'tv',name:'Chính tả g/gh, ng/ngh',hint:'Viết gh, ngh khi đứng trước e, ê, i. Các trường hợp còn lại viết g, ng.',
+ items:[['con _à','g',['g','gh']],['cái _ế','gh',['g','gh']],['_i nhớ','gh',['g','gh']],['_ấu bông','g',['g','gh']],['nhà _a','g',['g','gh']],['_ép vần','gh',['g','gh']],['_õ cửa','g',['g','gh']],['_ủ ngon','ng',['ng','ngh']],['_ỉ hè','ngh',['ng','ngh']],['con _é','ngh',['ng','ngh']],['_e nhạc','ngh',['ng','ngh']],['bé _oan','ng',['ng','ngh']]],
+ word:(s,a)=>s.replace('_',a)},
+{id:'t2a',grade:2,sub:'tv',name:'Chính tả s hay x',choices:['s','x'],hint:'Đọc cả cụm từ và nhớ lại chữ đã gặp trong sách. Mẹo: từ láy thường lặp cùng một phụ âm đầu (sạch sẽ, xinh xắn).',
+ items:[['_áng sớm','s'],['quả _oài','x'],['_inh xắn','x'],['con _óc','s'],['dòng _ông','s'],['_e đạp','x'],['_ạch sẽ','s'],['màu _anh lá','x'],['_ân trường','s'],['hoa _en','s'],['_âu kim','x'],['_ếp hàng','x']],
+ word:(s,a)=>s.replace('_',a)},
+{id:'t2b',grade:2,sub:'tv',name:'Chính tả ch hay tr',choices:['ch','tr'],hint:'Đọc cả cụm từ, nghĩ xem con đã gặp từ này trong bài đọc nào. Mẹo: từ láy thường lặp cùng phụ âm đầu (chăm chỉ, trong trẻo).',
+ items:[['_ường học','tr'],['_ăm chỉ','ch'],['lũy _e xanh','tr'],['_ú ý','ch'],['ông mặt _ời','tr'],['con _im','ch'],['_ồng cây','tr'],['_ơi đùa','ch'],['_ống trường','tr'],['quả _anh','ch'],['bức _anh','tr'],['_ăng sáng','tr']],
+ word:(s,a)=>s.replace('_',a)},
+{id:'t2c',grade:2,sub:'tv',name:'Từ chỉ sự vật, hoạt động, đặc điểm',choices:['Sự vật','Hoạt động','Đặc điểm'],keep:true,hint:'Sự vật: người, con vật, đồ vật, cây cối. Hoạt động: việc làm. Đặc điểm: màu sắc, hình dáng, tính nết, mùi vị…',
+ items:[['bàn ghế','Sự vật'],['cô giáo','Sự vật'],['quyển vở','Sự vật'],['con mèo','Sự vật'],['chạy','Hoạt động'],['viết','Hoạt động'],['quét nhà','Hoạt động'],['đọc sách','Hoạt động'],['xanh biếc','Đặc điểm'],['chăm chỉ','Đặc điểm'],['cao','Đặc điểm'],['ngọt','Đặc điểm']],
+ ask:w=>`Từ <b>“${w}”</b> là từ chỉ gì?`,say:w=>`Từ ${w} là từ chỉ gì?`},
+{id:'t2d',grade:2,sub:'tv',name:'Dấu chấm, dấu chấm hỏi, dấu chấm than',choices:['.','?','!'],keep:true,labels:{'.':'Dấu chấm ( . )','?':'Dấu chấm hỏi ( ? )','!':'Dấu chấm than ( ! )'},hint:'Câu hỏi dùng dấu chấm hỏi. Câu kể dùng dấu chấm. Câu bộc lộ cảm xúc (ôi, chà, quá…) dùng dấu chấm than.',
+ items:[['Bạn tên là gì','?'],['Hôm nay em đi học','.'],['Ôi, bông hoa đẹp quá','!'],['Mấy giờ chúng ta về','?'],['Em rất yêu mẹ','.'],['Chà, con diều bay cao quá','!'],['Bạn có thích đọc truyện không','?'],['Bố em là bác sĩ','.'],['Ôi, vui quá','!'],['Khi nào bạn đến chơi','?']],
+ ask:w=>`Chọn dấu câu cho câu: <b>${w}</b> <b class="gap">…</b>`,say:w=>`Chọn dấu câu cho câu: ${w}`},
+{id:'t3a',grade:3,sub:'tv',name:'Từ có nghĩa trái ngược',hint:'Từ trái nghĩa là từ có nghĩa ngược hẳn lại. Thử đặt hai từ cạnh nhau: “cao – thấp”, “to – nhỏ”.',
+ items:[['cao','thấp',['to','dài','nặng']],['nóng','lạnh',['ấm','khô','sáng']],['nhanh','chậm',['vội','gấp','khỏe']],['chăm chỉ','lười biếng',['siêng năng','cần cù','vui vẻ']],['sáng','tối',['trưa','đẹp','trắng']],['vui','buồn',['mừng','hiền','ngoan']],['rộng','hẹp',['dài','lớn','xa']],['mạnh','yếu',['khỏe','to','cao']],['già','trẻ',['cũ','lớn','hiền']],['khó','dễ',['khổ','mệt','lạ']],['đầy','vơi',['nhiều','to','kín']],['sạch','bẩn',['mới','gọn','trong']]],
+ ask:w=>`Từ nào trái nghĩa với <b>“${w}”</b>?`,say:w=>`Từ nào trái nghĩa với từ ${w}?`},
+{id:'t3b',grade:3,sub:'tv',name:'Câu có hình ảnh so sánh',hint:'Hình ảnh so sánh thường có các từ: như, giống như, tựa như, là…',
+ items:[['Mặt trăng tròn như cái đĩa bạc.',['Mặt trăng đã lên cao.','Đêm nay trời có trăng.','Em ngắm trăng cùng bà.']],['Đôi mắt bé sáng như sao.',['Bé mở mắt nhìn mẹ.','Bé đã ngủ say.','Mắt bé màu đen.']],['Dòng sông uốn quanh như dải lụa mềm.',['Dòng sông chảy qua làng.','Em đi tắm sông.','Nước sông rất mát.']],['Ông em hiền như ông Bụt.',['Ông em năm nay bảy mươi tuổi.','Ông em thích trồng cây.','Ông em đi tập thể dục.']],['Hoa giấy đỏ rực như lửa.',['Hoa giấy nở trước cổng.','Mẹ trồng một cây hoa giấy.','Hoa giấy có nhiều màu.']],['Chú mèo cuộn tròn như một cục bông.',['Chú mèo nằm trên ghế.','Nhà em nuôi một chú mèo.','Chú mèo kêu meo meo.']],['Tán bàng xòe ra giống như chiếc ô xanh.',['Cây bàng ở giữa sân trường.','Lá bàng rụng vào mùa đông.','Chúng em chơi dưới gốc bàng.']],['Cánh đồng lúa chín vàng như một tấm thảm.',['Bác nông dân gặt lúa.','Cánh đồng rất rộng.','Lúa đã chín rồi.']]],
+ ask:()=>`Câu nào có hình ảnh so sánh?`,say:()=>`Câu nào có hình ảnh so sánh?`},
+{id:'t4a',grade:4,sub:'tv',name:'Danh từ, động từ, tính từ',choices:['Danh từ','Động từ','Tính từ'],keep:true,hint:'Danh từ chỉ sự vật (người, vật, hiện tượng…). Động từ chỉ hoạt động, trạng thái. Tính từ chỉ đặc điểm, tính chất.',
+ items:[['học sinh','Danh từ'],['cánh đồng','Danh từ'],['bút chì','Danh từ'],['dòng sông','Danh từ'],['nhảy','Động từ'],['trồng','Động từ'],['bơi','Động từ'],['lắng nghe','Động từ'],['thông minh','Tính từ'],['đỏ thắm','Tính từ'],['rộng lớn','Tính từ'],['hiền lành','Tính từ']],
+ ask:w=>`Từ <b>“${w}”</b> thuộc từ loại nào?`,say:w=>`Từ ${w} thuộc từ loại nào?`},
+{id:'t4b',grade:4,sub:'tv',name:'Biện pháp nhân hóa',hint:'Nhân hóa là gọi hoặc tả sự vật, con vật bằng những từ dùng cho người (chị, ông, cô; ru, chào, ngóng chờ, hát…).',
+ items:[['Chị gió nhẹ nhàng ru lá ngủ.',['Gió thổi mạnh làm lá rụng.','Hôm nay trời nhiều gió.','Gió mang hơi lạnh về.']],['Ông mặt trời thức dậy, vươn vai chào buổi sáng.',['Mặt trời mọc ở đằng đông.','Nắng chiếu vào sân nhà.','Buổi sáng trời nắng nhẹ.']],['Chú gà trống hắng giọng gọi cả xóm dậy.',['Nhà em nuôi một con gà trống.','Gà trống có bộ lông đỏ.','Gà trống đứng trên đống rơm.']],['Hàng cây nghiêng mình chào đón chúng em.',['Hàng cây xanh tốt quanh năm.','Sân trường có nhiều cây.','Bác bảo vệ tưới cây.']],['Chiếc cặp sách nằm im, ngóng chờ em đến lớp.',['Chiếc cặp sách màu xanh.','Mẹ mua cho em chiếc cặp mới.','Em cất sách vào cặp.']],['Cô mây trắng rong chơi khắp bầu trời.',['Trên trời có nhiều mây.','Mây trắng bay qua núi.','Trời nhiều mây nên mát.']],['Dòng suối hát róc rách bên sườn đồi.',['Dòng suối chảy qua bản.','Nước suối rất trong.','Em rửa tay ở suối.']],['Bác xe lu cần mẫn làm việc suốt ngày.',['Chiếc xe lu đang làm đường.','Xe lu rất nặng.','Xe lu có bánh to.']]],
+ ask:()=>`Câu nào có sử dụng biện pháp nhân hóa?`,say:()=>`Câu nào có sử dụng biện pháp nhân hóa?`},
+{id:'t5a',grade:5,sub:'tv',name:'Từ đồng nghĩa',hint:'Từ đồng nghĩa là từ có nghĩa giống nhau hoặc gần giống nhau, có thể thay thế cho nhau trong câu.',
+ items:[['siêng năng','chăm chỉ',['lười biếng','nhanh nhẹn','hiền lành']],['dũng cảm','can đảm',['nhút nhát','cẩn thận','vui vẻ']],['to lớn','khổng lồ',['nhỏ bé','cao ráo','rộng rãi']],['bé nhỏ','tí hon',['to lớn','gầy gò','xinh xắn']],['Tổ quốc','đất nước',['quê nhà','làng xóm','thành phố']],['sung sướng','hạnh phúc',['buồn bã','lo lắng','bình tĩnh']],['thông minh','sáng dạ',['chậm chạp','chăm chỉ','ngoan ngoãn']],['bắt đầu','khởi đầu',['kết thúc','tiếp tục','dừng lại']],['vội vàng','hấp tấp',['thong thả','chậm rãi','cẩn thận']],['chăm sóc','săn sóc',['bỏ mặc','nhìn ngắm','dạy dỗ']]],
+ ask:w=>`Từ nào đồng nghĩa với <b>“${w}”</b>?`,say:w=>`Từ nào đồng nghĩa với từ ${w}?`},
+{id:'t5b',grade:5,sub:'tv',name:'Đại từ xưng hô',hint:'Đại từ xưng hô là từ người nói dùng để tự chỉ mình hoặc chỉ người khác khi giao tiếp: tôi, chúng tôi, chúng ta, nó, họ…',
+ items:[['tôi',['bàn','chạy','đẹp']],['chúng tôi',['sân trường','học bài','xanh tươi']],['chúng ta',['ngôi nhà','nhảy dây','chăm chỉ']],['họ',['hoa','hát','vui']],['nó',['mèo','ngủ','ngoan']],['chúng tớ',['bạn bè','vui chơi','đoàn kết']]],
+ ask:()=>`Từ nào là đại từ xưng hô?`,say:()=>`Từ nào là đại từ xưng hô?`},
+{id:'t5c',grade:5,sub:'tv',name:'Chọn kết từ, cặp kết từ',hint:'Xem quan hệ giữa hai ý: trái ngược → nhưng; nguyên nhân – kết quả → vì … nên; điều kiện → nếu … thì; tăng tiến → không những … mà còn.',
+ items:[['… trời mưa to … em vẫn đến lớp đúng giờ.','Tuy – nhưng',['Vì – nên','Nếu – thì','Không những – mà còn']],['… chăm học … Nam đã đạt điểm cao trong kì thi.','Vì – nên',['Tuy – nhưng','Hễ – thì','Không những – mà còn']],['… ngày mai trời đẹp … lớp em sẽ đi tham quan.','Nếu – thì',['Tuy – nhưng','Không những – mà còn','Vì – nên']],['Lan … học giỏi … còn hát rất hay.','không những – mà',['tuy – nhưng','nếu – thì','vì – nên']],['Em thích đọc truyện … em trai em thích vẽ tranh.','còn',['vì','nếu','nên']],['Mẹ mua cho em quyển sách … cây bút mới.','và',['nhưng','vì','nên']],['Bài toán khó … Minh vẫn giải được.','nhưng',['vì','và','nên']],['Cây lúa xanh tốt … được bón phân đầy đủ.','vì',['nhưng','nếu','còn']]],
+ ask:w=>`Chọn từ thích hợp điền vào chỗ trống:<br><b>${w}</b>`,say:w=>`Chọn từ thích hợp điền vào chỗ trống: ${w.replace(/…/g,' chỗ trống ')}`},
+];
+/* chuyển ngân hàng Tiếng Việt thành câu hỏi */
+TV.forEach(t=>{t.bank=true;t.make=it=>{
+  let [w,ans,ch]=it;
+  if(t.id==='t3b'||t.id==='t4b'){ch=ans;ans=w;return {text:t.ask(),speak:t.say(),kind:'choice',choices:shuffle([ans,...ch]),answer:ans,long:true,hint:t.hint,explain:`Câu “${ans}” ${t.id==='t3b'?'có hình ảnh so sánh.':'dùng từ ngữ chỉ người để tả sự vật, con vật.'}`}}
+  if(t.id==='t5b'){ch=ans;ans=w;return {text:t.ask(),speak:t.say(),kind:'choice',choices:shuffle([ans,...ch]),answer:ans,hint:t.hint,explain:`“${ans}” là đại từ xưng hô.`}}
+  if(t.word){return {html:`<span class="word">${blank(w)}</span>`,lead:'Điền chữ còn thiếu:',speak:`Điền chữ còn thiếu vào từ: ${t.word(w,ans)}`,kind:'choice',keep:true,choices:ch||t.choices,answer:ans,hint:t.hint,explain:`Viết đúng là: “${t.word(w,ans)}”.`}}
+  const choices=ch?shuffle([ans,...ch]):t.choices;
+  return {text:t.ask(w),speak:t.say(w),kind:'choice',keep:!ch&&t.keep,choices,labels:t.labels,answer:ans,long:t.id==='t5c',hint:t.hint,explain:t.id==='t2d'?`${w}${ans}`:t.id==='t5c'?w.replace('…',ans.split(' – ')[0]).replace('…',ans.split(' – ')[1]||''):`Đáp án: ${ans}.`}
+}});
+TOPICS.push(...TV);
+const SUBJ={toan:'Toán',tv:'Tiếng Việt'};
+function makeSession(topic){
+  if(topic.bank){return shuffle(topic.items).slice(0,10).map(topic.make)}
+  const qs=[],seen=new Set();let guard=0;
+  while(qs.length<10&&guard++<200){const q=topic.gen();const k=(q.eq||q.text||q.html);if(seen.has(k))continue;seen.add(k);qs.push(q)}
+  return qs;
+}
+if(typeof module!=='undefined')module.exports={TOPICS,makeSession,fmt};
+
+</script>
+<script>
+/* ===== Lưu trữ trên thiết bị (chỉ biệt danh + điểm, không thông tin cá nhân) ===== */
+const KEY='gsn.v1';
+const uid=()=>Math.random().toString(36).slice(2,9);
+let S=(()=>{try{const v=JSON.parse(localStorage.getItem(KEY));if(v&&v.kids&&v.kids.length)return v}catch(e){}return {kids:[{id:uid(),name:'Bé',grade:2}],active:null,hist:{}}})();
+if(!S.active||!S.kids.find(k=>k.id===S.active))S.active=S.kids[0].id;
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const kid=()=>S.kids.find(k=>k.id===S.active);
+const hist=()=>(S.hist[S.active]||=[]);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const vn=n=>String(Math.round(n*10)/10).replace('.',',');
+const $=s=>document.querySelector(s);
+const app=$('#app');
+let viewGrade=null;
+
+function toast(t){const el=$('#toast');el.textContent=t;el.hidden=false;clearTimeout(toast._t);toast._t=setTimeout(()=>el.hidden=true,2400)}
+
+/* ===== Đọc đề bằng giọng tiếng Việt (nếu thiết bị có) ===== */
+let viVoice=null;
+function findVoice(){try{viVoice=speechSynthesis.getVoices().find(v=>/^vi/i.test(v.lang))||null}catch(e){viVoice=null}const b=document.querySelector('.say');if(b)b.hidden=!viVoice}
+try{if('speechSynthesis' in window){findVoice();speechSynthesis.onvoiceschanged=findVoice}}catch(e){}
+function speak(t){if(!viVoice)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t.replace(/<[^>]+>/g,''));u.lang='vi-VN';u.voice=viVoice;u.rate=.9;speechSynthesis.speak(u)}catch(e){}}
+
+/* ===== Header ===== */
+function renderChip(){const k=kid();$('#kidChip').innerHTML=`${esc(k.name)} <span class="g">Lớp ${k.grade}</span>`}
+$('#brand').onclick=()=>home();
+$('#parentBtn').onclick=()=>gate();
+$('#kidChip').onclick=()=>kidPicker();
+
+function lastScore(tid){const h=hist().filter(x=>x.tid===tid);return h.length?h[h.length-1].score:null}
+
+/* ===== Trang chủ ===== */
+function home(){
+  const k=kid();if(viewGrade==null)viewGrade=k.grade;renderChip();
+  const list=sub=>TOPICS.filter(t=>t.grade===viewGrade&&t.sub===sub).map(t=>{const s=lastScore(t.id);const n=hist().filter(x=>x.tid===t.id).length;
+    return `<li><button class="topic" data-t="${t.id}"><span class="t">${t.name}<small>${n?`Đã luyện ${n} lượt`:'Chưa luyện'} · 10 câu</small></span><span class="score-badge ${s==null?'none':''}">${s==null?'—':vn(s)}</span></button></li>`}).join('');
+  const total=hist().length;
+  app.innerHTML=`
+  <section class="hello">
+    <h1>Chào ${esc(k.name)}! Hôm nay mình luyện gì nào?</h1>
+    <p class="muted" style="margin:0">${total?`Con đã hoàn thành ${total} bài luyện. Cố lên nhé!`:'Chọn một bài bên dưới. Làm sai cũng không sao, gia sư sẽ gợi ý cho con.'}</p>
+  </section>
+  <div class="grades" role="group" aria-label="Chọn lớp">${[1,2,3,4,5].map(g=>`<button data-g="${g}" aria-pressed="${g===viewGrade}">Lớp ${g}</button>`).join('')}</div>
+  <div class="subjects">
+    <section class="subj"><h2>Toán <span class="tag">Lớp ${viewGrade}</span></h2><ul class="topics">${list('toan')}</ul></section>
+    <section class="subj"><h2>Tiếng Việt <span class="tag">Lớp ${viewGrade}</span></h2><ul class="topics">${list('tv')}</ul></section>
+  </div>
+  <p class="note">Bài tập bám theo chương trình GDPT 2018. Đề Toán được tạo mới mỗi lần làm. Dữ liệu chỉ lưu trên thiết bị này, không cần đăng ký và không thu thập thông tin cá nhân.</p>`;
+  app.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{viewGrade=+b.dataset.g;home()});
+  app.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>start(b.dataset.t));
+  window.scrollTo(0,0);
+}
+
+/* ===== Làm bài ===== */
+let Z=null;
+function start(tid){const topic=TOPICS.find(t=>t.id===tid);Z={topic,qs:makeSession(topic),i:0,tries:0,res:[],done:false};renderQ()}
+function parseNum(s){s=String(s).trim().replace(/[\s ]/g,'');if(!s)return NaN;if(/^\d{1,3}(\.\d{3})+$/.test(s))s=s.replace(/\./g,'');s=s.replace(',','.');if(!/^\d*\.?\d+$/.test(s))return NaN;return parseFloat(s)}
+const showAns=q=>q.kind==='choice'?(q.labels?q.labels[q.answer]:q.answer):fmt(q.answer)+(q.unit?' '+q.unit:'');
+
+function renderQ(){
+  const q=Z.qs[Z.i],n=Z.qs.length;
+  const track=Z.qs.map((_,j)=>`<i class="${j<Z.res.length?Z.res[j]:j===Z.i?'cur':''}"></i>`).join('');
+  const body=q.eq?`<div class="qeq">${q.eq.replace('☐','<span class="box">☐</span>')}</div>`:q.html?`<div class="qeq">${q.html}</div>`:`<div class="qtext">${q.text}</div>`;
+  const ans=q.kind==='choice'
+    ?`<div class="choices ${q.long?'long':''} ${q.choices.every(c=>CMP.includes(c))&&!q.labels?'syms':''}">${q.choices.map((c,j)=>`<button class="choice ${CMP.includes(c)&&!q.labels?'sym':''}" data-c="${j}">${esc(q.labels?q.labels[c]:c)}</button>`).join('')}</div>`
+    :`<form class="answer" id="af" autocomplete="off"><input id="ans" inputmode="decimal" aria-label="Nhập đáp số" placeholder="?">${q.unit?`<span class="unit">${esc(q.unit)}</span>`:''}<button class="btn primary" type="submit">Kiểm tra</button></form>`;
+  app.innerHTML=`
+  <div class="qbar"><button class="small-btn" id="quit">← Thoát</button><span class="ttl">${Z.topic.name}</span><span class="muted num">Câu ${Z.i+1}/${n}</span></div>
+  <div class="track" aria-hidden="true">${track}</div>
+  <article class="sheet pop">
+    <span class="qno">${Z.i+1}</span>
+    ${q.lead?`<div class="qlead">${q.lead}</div>`:''}
+    ${body}
+    <button class="say" id="say" ${viVoice?'':'hidden'}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>Đọc đề</button>
+    ${ans}
+    <div id="fb"></div>
+  </article>`;
+  $('#quit').onclick=()=>home();
+  $('#say').onclick=()=>speak(q.speak||q.text||'');
+  if(q.kind==='choice'){app.querySelectorAll('.choice').forEach(b=>b.onclick=()=>check(q.choices[+b.dataset.c],b))}
+  else{const inp=$('#ans');setTimeout(()=>inp.focus({preventScroll:true}),30);$('#af').onsubmit=e=>{e.preventDefault();const v=parseNum(inp.value);if(isNaN(v)){fb('hint','Con hãy nhập một số nhé.','Ví dụ: 12 hoặc 3,5');return}check(v)}}
+}
+function fb(kind,title,msg,extra){$('#fb').innerHTML=`<div class="fb ${kind}" role="status"><b>${title}</b>${msg?`<span>${msg}</span>`:''}${extra||''}</div>`}
+const PRAISE=['Đúng rồi! Giỏi quá!','Chính xác!','Tuyệt vời!','Đúng rồi, con làm tốt lắm!','Hoan hô, đúng rồi!'];
+function check(v,btn){
+  if(Z.done)return;
+  const q=Z.qs[Z.i];
+  const ok=q.kind==='choice'?v===q.answer:Math.abs(v-q.answer)<1e-6;
+  if(ok){
+    Z.res.push(Z.tries?'half':'ok');Z.done=true;
+    if(btn)btn.classList.add('right');lock();
+    fb('ok',pick(PRAISE),Z.tries?'Lần sau con cố gắng đúng ngay từ lần đầu nhé.':'',q.col?q.col:'');
+    next();
+  }else if(Z.tries===0&&!(q.kind==='choice'&&q.choices.length<=2)){
+    Z.tries=1;if(btn){btn.classList.add('wrong');btn.disabled=true}
+    fb('hint','Chưa đúng rồi, con thử lại nhé!',`<strong>Gợi ý:</strong> ${q.hint}`,q.hintHtml?`<div>${q.hintHtml}</div>`:'');
+    const inp=$('#ans');if(inp){inp.select()}
+  }else{
+    Z.res.push('no');Z.done=true;if(btn)btn.classList.add('wrong');lock(true);
+    fb('bad',`Đáp án đúng là: ${esc(showAns(q))}`,q.explain+(q.kind==='choice'&&q.choices.length<=2?`<br><strong>Mẹo nhớ:</strong> ${q.hint}`:''),q.col||'');
+    next();
+  }
+}
+function lock(markRight){app.querySelectorAll('.choice').forEach(b=>{b.disabled=true;if(markRight){const q=Z.qs[Z.i];if(q.choices[+b.dataset.c]===q.answer)b.classList.add('right')}});const i=$('#ans');if(i)i.disabled=true;const s=app.querySelector('#af button');if(s)s.disabled=true}
+function next(){
+  const last=Z.i===Z.qs.length-1;
+  const a=document.createElement('div');a.className='actions';a.innerHTML=`<button class="btn primary" id="nx">${last?'Xem điểm':'Câu tiếp theo →'}</button>`;
+  $('#fb').appendChild(a);const b=$('#nx');b.focus({preventScroll:true});b.scrollIntoView({block:'nearest',behavior:'smooth'});
+  b.onclick=()=>{if(last)finish();else{Z.i++;Z.tries=0;Z.done=false;renderQ();window.scrollTo(0,0)}};
+}
+
+/* ===== Kết quả ===== */
+function finish(){
+  const pts=Z.res.reduce((s,r)=>s+(r==='ok'?1:r==='half'?.5:0),0);
+  const score=Math.round(pts/Z.qs.length*10*2)/2;
+  hist().push({tid:Z.topic.id,score,n:Z.qs.length,ok:Z.res.filter(r=>r==='ok').length,t:Date.now()});save();
+  const phe=score>=9?'Rất giỏi! Con hãy giữ vững phong độ nhé.':score>=7?'Khá lắm! Ôn lại những câu sai là con sẽ đạt điểm 10.':score>=5?'Con đã cố gắng. Làm lại một lần nữa sẽ tiến bộ hơn.':'Không sao đâu! Con đọc kĩ gợi ý rồi làm lại nhé.';
+  const st=score>=9?3:score>=7?2:score>=5?1:0;
+  const star=on=>`<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z" fill="${on?'var(--amber-line)':'none'}" stroke="${on?'var(--amber)':'var(--line-strong)'}" stroke-width="1.5" stroke-linejoin="round"/></svg>`;
+  const items=Z.qs.map((q,j)=>{const r=Z.res[j];const p=(q.eq||q.html||q.text).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ');
+    return `<li><span class="st ${r}">${r==='ok'?'Đ':r==='half'?'½':'S'}</span><span class="q">${esc(p)}<small>Đáp án: ${esc(showAns(q))}${r==='no'?' — '+esc(q.explain.replace(/<[^>]+>/g,'')):''}</small></span></li>`}).join('');
+  app.innerHTML=`
+  <section class="result">
+    <div class="sheet grade-card">
+      <div class="mark" aria-label="Điểm ${vn(score)}"><div><small>Điểm</small><span class="num">${vn(score)}</span></div></div>
+      <div class="loi-phe"><div class="lbl">Lời phê của gia sư</div><p>${phe}</p><div class="stars" aria-label="${st} sao">${star(st>=1)}${star(st>=2)}${star(st>=3)}</div></div>
+    </div>
+    <div class="actions"><button class="btn primary" id="again">Làm lại bài này</button><button class="btn ghost" id="back">Chọn bài khác</button></div>
+    <h2 style="font-size:1.15rem">Xem lại bài làm</h2>
+    <ul class="review">${items}</ul>
+    <p class="muted" style="font-size:.85rem;margin:0">Đ: đúng ngay lần đầu · ½: đúng sau gợi ý · S: chưa đúng.</p>
+  </section>`;
+  const tid=Z.topic.id;$('#again').onclick=()=>start(tid);$('#back').onclick=()=>home();window.scrollTo(0,0);
+}
+
+/* ===== Chọn bé ===== */
+function kidPicker(){
+  const ov=$('#overlay');
+  ov.innerHTML=`<div class="panel" role="dialog" aria-label="Chọn bé"><h2 style="font-size:1.2rem">Ai đang học?</h2><div class="kids">${S.kids.map(k=>`<button class="kid ${k.id===S.active?'on':''}" data-k="${k.id}"><span class="nm">${esc(k.name)}</span><span class="muted">Lớp ${k.grade}</span></button>`).join('')}</div><p class="muted" style="margin:0;font-size:.85rem">Thêm bé hoặc đổi tên, đổi lớp trong khu vực Phụ huynh.</p><button class="btn ghost" id="ovx">Đóng</button></div>`;
+  ov.hidden=false;
+  ov.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{S.active=b.dataset.k;save();viewGrade=null;ov.hidden=true;home()});
+  $('#ovx').onclick=()=>ov.hidden=true;ov.onclick=e=>{if(e.target===ov)ov.hidden=true};
+}
+
+/* ===== Khu vực phụ huynh ===== */
+function gate(){
+  const a=R(6,9),b=R(6,9);
+  app.innerHTML=`<section class="stack"><div class="panel" style="display:grid;gap:12px;max-width:440px">
+  <h2 style="font-size:1.3rem">Khu vực dành cho phụ huynh</h2>
+  <p class="muted" style="margin:0">Để vào, xin trả lời câu hỏi sau. Phần này giúp các bé không vô tình thay đổi cài đặt.</p>
+  <form id="gf" class="row" autocomplete="off"><div class="field"><label for="ga">${a} × ${b} = ?</label><input id="ga" inputmode="numeric"></div><button class="btn primary" style="align-self:end">Vào</button></form>
+  <div id="gm"></div><button class="small-btn" id="gb" style="justify-self:start">← Về trang học</button></div></section>`;
+  $('#ga').focus();$('#gb').onclick=()=>home();
+  $('#gf').onsubmit=e=>{e.preventDefault();if(+$('#ga').value===a*b)parent();else $('#gm').innerHTML='<div class="fb bad"><b>Chưa đúng</b><span>Xin thử lại.</span></div>'};
+}
+let pend=null;
+function parent(){
+  const k=kid(),h=hist();renderChip();
+  const avg=h.length?h.reduce((s,x)=>s+x.score,0)/h.length:0;
+  const week=h.filter(x=>Date.now()-x.t<7*864e5).length;
+  const by={};h.forEach(x=>{(by[x.tid]||=[]).push(x)});
+  const rows=Object.keys(by).map(tid=>{const t=TOPICS.find(z=>z.id===tid);if(!t)return null;const a=by[tid];const av=a.reduce((s,x)=>s+x.score,0)/a.length;return {t,n:a.length,last:a[a.length-1].score,av}}).filter(Boolean).sort((x,y)=>x.av-y.av);
+  const weak=rows.filter(r=>r.av<7);
+  const recent=h.slice(-8).reverse();
+  const d=t=>new Date(t).toLocaleDateString('vi-VN',{day:'2-digit',month:'2-digit'});
+  app.innerHTML=`<section class="stack">
+  <div class="row"><h1 style="font-size:1.6rem;flex:1">Theo dõi học tập</h1><button class="small-btn" id="pb">← Về trang học</button></div>
+  <div class="panel" style="display:grid;gap:12px">
+    <div class="row"><h2 style="font-size:1.15rem;flex:1">${esc(k.name)} · Lớp ${k.grade}</h2></div>
+    <div class="kpis"><div class="kpi"><b>${h.length}</b><span>bài đã làm</span></div><div class="kpi"><b>${week}</b><span>bài trong 7 ngày</span></div><div class="kpi"><b>${h.length?vn(avg):'—'}</b><span>điểm trung bình</span></div></div>
+    ${weak.length?`<div><span class="pill warn">Cần ôn thêm</span> ${weak.map(r=>esc(r.t.name)).join(', ')}</div>`:h.length?`<div><span class="pill good">Học tốt</span> Chưa có bài nào dưới 7 điểm.</div>`:'<p class="muted" style="margin:0">Bé chưa làm bài nào. Kết quả sẽ hiện ở đây sau mỗi bài luyện.</p>'}
+    ${rows.length?`<div class="tbl-wrap"><table><thead><tr><th>Bài</th><th style="text-align:right">Lượt</th><th style="text-align:right">Gần nhất</th><th style="text-align:right">TB</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${esc(r.t.name)}<br><span class="muted" style="font-size:.8rem">${SUBJ[r.t.sub]} · Lớp ${r.t.grade}</span></td><td class="n">${r.n}</td><td class="n">${vn(r.last)}</td><td class="n">${vn(r.av)}</td></tr>`).join('')}</tbody></table></div>`:''}
+    ${recent.length?`<details><summary style="cursor:pointer;font-weight:600">Lần làm gần đây</summary><ul class="review" style="margin-top:8px">${recent.map(x=>{const t=TOPICS.find(z=>z.id===x.tid);return `<li><span class="q">${t?esc(t.name):''}<small>${d(x.t)} · ${x.ok}/${x.n} câu đúng ngay lần đầu</small></span><b class="num" style="color:var(--red)">${vn(x.score)}</b></li>`}).join('')}</ul></details>`:''}
+    <div class="row"><button class="btn primary" id="copy">Sao chép báo cáo gửi Zalo</button></div>
+    <div id="cpbox"></div>
+  </div>
+
+  <div class="panel" style="display:grid;gap:12px">
+    <h2 style="font-size:1.15rem">Các bé trong gia đình</h2>
+    <div class="kids">${S.kids.map(x=>`<div class="kid ${x.id===S.active?'on':''}"><span class="nm">${esc(x.name)}</span><span class="muted">Lớp ${x.grade}</span>${x.id!==S.active?`<button class="small-btn" data-use="${x.id}">Chọn</button>`:''}</div>`).join('')}</div>
+    <form id="kf" class="row" autocomplete="off">
+      <div class="field"><label for="kn">Tên gọi ở nhà của bé đang chọn</label><input id="kn" maxlength="20" value="${esc(k.name)}"></div>
+      <div class="field" style="max-width:130px"><label for="kg">Lớp</label><select id="kg">${[1,2,3,4,5].map(g=>`<option ${g===k.grade?'selected':''}>${g}</option>`).join('')}</select></div>
+      <button class="btn primary" style="align-self:end">Lưu</button>
+    </form>
+    <p class="muted" style="margin:0;font-size:.85rem">Chỉ cần tên gọi ở nhà (ví dụ: Bin, Na). Không nhập họ tên đầy đủ.</p>
+    <div class="row"><button class="small-btn" id="addk">+ Thêm bé</button>${S.kids.length>1?'<button class="small-btn" id="delk">Xóa bé đang chọn</button>':''}<button class="small-btn" id="clr">Xóa kết quả của bé</button></div>
+    <div id="cf"></div>
+  </div>
+  <p class="note" style="margin-top:0">Dữ liệu lưu trên trình duyệt của thiết bị này. Xóa dữ liệu duyệt web hoặc dùng chế độ ẩn danh sẽ mất kết quả. Mỗi máy theo dõi riêng.</p>
+  </section>`;
+  $('#pb').onclick=()=>{viewGrade=null;home()};
+  app.querySelectorAll('[data-use]').forEach(b=>b.onclick=()=>{S.active=b.dataset.use;save();parent()});
+  $('#kf').onsubmit=e=>{e.preventDefault();const nm=$('#kn').value.trim()||'Bé';k.name=nm.slice(0,20);k.grade=+$('#kg').value;save();viewGrade=null;toast('Đã lưu');parent()};
+  $('#addk').onclick=()=>{const nk={id:uid(),name:'Bé '+(S.kids.length+1),grade:1};S.kids.push(nk);S.active=nk.id;save();toast('Đã thêm bé. Hãy đặt tên và chọn lớp.');parent();setTimeout(()=>$('#kn')?.select(),50)};
+  const ask=(msg,fn)=>{$('#cf').innerHTML=`<div class="confirm"><span>${msg}</span><div class="row"><button class="btn danger" id="cy">Xóa</button><button class="btn ghost" id="cn">Không</button></div></div>`;$('#cy').onclick=fn;$('#cn').onclick=()=>$('#cf').innerHTML=''};
+  $('#clr').onclick=()=>ask(`Xóa toàn bộ ${h.length} kết quả của ${esc(k.name)}? Không thể khôi phục.`,()=>{S.hist[S.active]=[];save();toast('Đã xóa kết quả');parent()});
+  const dk=$('#delk');if(dk)dk.onclick=()=>ask(`Xóa bé ${esc(k.name)} cùng toàn bộ kết quả?`,()=>{delete S.hist[S.active];S.kids=S.kids.filter(x=>x.id!==S.active);S.active=S.kids[0].id;save();toast('Đã xóa');parent()});
+  $('#copy').onclick=()=>{
+    const lines=[`BÁO CÁO HỌC TẬP – ${k.name} (Lớp ${k.grade})`,`Ngày ${new Date().toLocaleDateString('vi-VN')}`,`Đã làm: ${h.length} bài (${week} bài trong 7 ngày)`,h.length?`Điểm trung bình: ${vn(avg)}`:'',''];
+    rows.slice().sort((x,y)=>y.n-x.n).forEach(r=>lines.push(`• ${SUBJ[r.t.sub]} – ${r.t.name}: ${r.n} lượt, gần nhất ${vn(r.last)} điểm`));
+    if(weak.length)lines.push('',`Cần ôn thêm: ${weak.map(r=>r.t.name).join(', ')}`);
+    const txt=lines.filter((l,i)=>l!==''||i>3).join('\n').trim();
+    const fallback=()=>{$('#cpbox').innerHTML=`<p class="muted" style="margin:0 0 6px;font-size:.85rem">Thiết bị chưa cho phép sao chép tự động. Hãy chọn đoạn dưới đây rồi sao chép:</p><textarea id="cpt" readonly>${esc(txt)}</textarea>`;$('#cpt').select()};
+    try{navigator.clipboard.writeText(txt).then(()=>toast('Đã sao chép. Mở Zalo và dán để gửi.'),fallback)}catch(e){fallback()}
+  };
+}
+
+home();
+</script>
+
+</body>
+</html>
